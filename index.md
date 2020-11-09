@@ -4,4 +4,4 @@ Hier kunt u een straks vragen vinden.
 
 [page2](./another-page)
 
-[test](./test2)
+[test](./pages/test2)
