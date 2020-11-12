@@ -38,3 +38,14 @@ Having trouble with Pages? Check out our [documentation](https://docs.github.com
 
 > site:
 > [https://bartvantilburgwagemakers.github.io/Me-bloeie-wir-op/](https://bartvantilburgwagemakers.github.io/Me-bloeie-wir-op/)
+
+
+### local run
+
+#### to install 
+https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/testing-your-github-pages-site-locally-with-jekyll
+
+`bundle install`
+
+#### to run,
+> bundle exec jekyll serve
