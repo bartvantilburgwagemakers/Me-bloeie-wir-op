@@ -26,6 +26,8 @@ Test vraag:
 
 <button id="answerBtn">Click me</button>
 
+[back](././)
+
 <script>
 window.onload = function test(){
     var btn = document.getElementById("answerBtn");
