@@ -1,0 +1,51 @@
+<title>test</title>
+<script src="../assets/js/spheroid.js"></script>
+<script src="../assets/js/distance.js"></script>
+<!-- <script src="../assets/js/LocationService.js"></script> -->
+<script type="module">
+  import { GetCurrentLocation } from "/assets/js/LocationService.js";
+  window.GetCurrentLocation = GetCurrentLocation;
+</script>
+
+<div id="loc"></div>
+
+<div id="debug"></div>
+
+<button onclick="test()">test</button>
+<script>
+  var coordinates = [];
+
+  function test() {
+    console.log("test start");
+
+    var result = GetCurrentLocation();
+
+    result.then(
+      function (longlat) {
+        //success handler function is invoked
+        console.log(longlat);
+        coordinates.push(longlat);
+        showCoordinates();
+      },
+      function (errorMessage) {
+        console.log(errorMessage);
+      }
+    );
+
+    console.log("test end");
+  }
+  function showCoordinates() {
+    var div = document.getElementById("debug");
+    div.innerHTML ="";
+    //   var innerDiv;
+    // coordinates.forEach(location => {
+    //     location[0] + location[1]
+    // });
+
+    for (var c in coordinates) {
+      var newElement = document.createElement("div");
+      newElement.innerHTML = "lat " + coordinates[c][0] + ": long " + coordinates[c][1];
+      div.appendChild(newElement);
+    }
+  }
+</script>
