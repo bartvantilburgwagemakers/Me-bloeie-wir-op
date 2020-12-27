@@ -1,6 +1,11 @@
 <title>test</title>
 <script src="../assets/js/spheroid.js"></script>
 <script src="../assets/js/distance.js"></script>
+
+<style>
+  body{ background-color: cornflowerblue;  }
+  text { color: darkgreen;}
+</style>
 <!-- <script src="../assets/js/LocationService.js"></script> -->
 <script type="module">
   import { GetCurrentLocation } from "/assets/js/LocationService.js";
@@ -12,6 +17,8 @@
 <div id="debug"></div>
 
 <button onclick="test()">test</button>
+
+<button onclick="testDistance()">test 2 </button>
 <script>
   var coordinates = [];
 
@@ -37,15 +44,26 @@
   function showCoordinates() {
     var div = document.getElementById("debug");
     div.innerHTML ="";
-    //   var innerDiv;
-    // coordinates.forEach(location => {
-    //     location[0] + location[1]
-    // });
-
+ 
     for (var c in coordinates) {
       var newElement = document.createElement("div");
       newElement.innerHTML = "lat " + coordinates[c][0] + ": long " + coordinates[c][1];
       div.appendChild(newElement);
     }
+  }
+    
+  function testDistance(){
+    var length = coordinates.length -1;
+    var firstCoordinate = coordinates[length -1];
+    var lastCoordinate  = coordinates[length];
+
+    var phi1 = firstCoordinate[0] * Math.PI / 180;
+		var phi2 = lastCoordinate[0] * Math.PI / 180;
+		var dLambda = (firstCoordinate[1] - lastCoordinate[1]) * Math.PI / 180;
+
+	with(Spheroid.wgs84) 
+     var s = distance(phi1, phi2, dLambda)
+  
+  console.log("test s "+s);   
   }
 </script>
