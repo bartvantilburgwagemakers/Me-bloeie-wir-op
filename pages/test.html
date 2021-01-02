@@ -66,4 +66,35 @@
   
   console.log("test s "+s);   
   }
+
+  function calcDistance(firstCoordinate, secondCoordinate){
+    var phi1 = firstCoordinate[0] * Math.PI / 180;
+		var phi2 = secondCoordinate[0] * Math.PI / 180;
+		var dLambda = (firstCoordinate[1] - secondCoordinate[1]) * Math.PI / 180;
+
+	  with(Spheroid.wgs84) 
+      var m = distance(phi1, phi2, dLambda)
+
+      return m;
+  }
+
+  var lastComparedPoint;
+  var distanceInMeters = 0;
+
+function interval(){
+  var currentLoc = GetCurrentLocation();
+
+  if( coordinates.length > 1){
+    var indexOfLastPoint = coordinates.length -1;
+    var lastPoint = coordinates[indexOfLastPoint]
+    if(lastComparedPoint!= lastPoint){
+      lastComparedPoint = lastPoint;
+      var newDist = calcDistance(coordinates[indexOfLastPoint-1], lastPoint);
+      console.log("New distance to add "+ newDist +" total was "+distanceInMeters);
+      distanceInMeters += newDist;
+    }
+  } 
+}
+  // window.setInterval(interval, 300000);
+  window.setInterval(interval, 3000);
 </script>
