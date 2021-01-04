@@ -1,0 +1,79 @@
+<title>Geographical distances</title>
+<script src="../assets/js/spheroid.js"></script>
+<script src="../assets/js/distance.js"></script>
+<style>
+fieldset {
+	width: 10em;
+	float: left;
+}
+div {
+	clear: both;
+}
+</style>
+<h1>Distances on the WGS84 ellipsoid</h1>
+<form>
+ <p>
+  Input geographical coordinates in degrees as signed floating point values.<br>
+  <em>source code:</em> <a href="../assets/js/spheroid.js"> </a> 
+ </p>
+ <fieldset>
+  <legend>Point 1</legend>
+  <label>Latitude:</label><br>
+  <input type="text" name="lat1" value="0"><br>
+  <label>Longitude:</label><br>
+  <input type="text" name="long1" value="0"><br>
+ </fieldset>
+ <fieldset>
+  <legend>Point 2</legend>
+  <label>Latitude:</label><br>
+  <input type="text" name="lat2" value="0"><br>
+  <label>Longitude:</label><br>
+  <input type="text" name="long2" value="0"><br>
+ </fieldset>
+ <div><input type="submit" id="calc" value="calculate distance"></div>
+</form>
+<pre>
+</pre>
+<script>
+var pre = document.getElementsByTagName('pre')[0];
+
+// capture('click', '#calc', function() {
+document.getElementById("calc").onclick = function calculate(){
+	var	form = this.form,
+
+		lat1 = Number(form.lat1.value),
+		long1 = Number(form.long1.value),
+
+		lat2 = Number(form.lat2.value),
+		long2 = Number(form.long2.value),
+
+		phi1 = lat1 * Math.PI / 180,
+		phi2 = lat2 * Math.PI / 180,
+		dLambda = (long1 - long2) * Math.PI / 180;
+
+	with(Spheroid.wgs84) var
+		s = distance(phi1, phi2, dLambda),
+		s_sm = smallDistance(phi1, phi2, dLambda),
+		s_v = vincentyDistance(phi1, phi2, dLambda),
+		s_sp = sphericalDistance(phi1, phi2, dLambda),
+		s_d = differentialDistance(phi1, phi2, dLambda);
+
+	var	dS = (Math.abs(s - s_v) * 100 / s).toFixed(4),
+		dS_sm = (Math.abs(s_sm - s_v) * 100 / s_sm).toFixed(4),
+		dS_sp = (Math.abs(s_sp - s_v) * 100 / s_sp).toFixed(4),
+		dS_d = (Math.abs(s_d - s_v) * 100 / s_d).toFixed(4);
+
+	pre.innerHTML = [
+		's<sub>Vincenty</sub>\t= ' + s_v.toFixed(3) + 'm &plusmn; 1mm',
+		's\t= ' + s.toFixed(3) + 'm&middot;(1 &plusmn; ' + dS + '%)',
+		's<sub>small</sub>\t= ' + s_sm.toFixed(3) + 'm&middot;(1 &plusmn; ' +
+			dS_sm + '%)',
+		's<sub>sphere</sub>\t= ' + s_sp.toFixed(3) + 'm&middot;(1 &plusmn; ' +
+			dS_sp + '%)',
+		's<sub>diff</sub>\t= ' + s_d.toFixed(3) + 'm&middot;(1 &plusmn; ' +
+			dS_d + '%)'
+		].join('<br>');
+
+	return false;
+};
+</script>
