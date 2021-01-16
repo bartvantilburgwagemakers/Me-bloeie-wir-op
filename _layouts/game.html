@@ -21,6 +21,10 @@
     <script src="../assets/js/spheroid.js"></script>
     <script src="../assets/js/distance.js"></script>
     <script src="../assets/js/main.js"></script>
+    <script type="module">
+      import { GetCurrentLocation } from "/assets/js/LocationService.js";
+      window.GetCurrentLocation = GetCurrentLocation;
+    </script>
   </head>
   <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>

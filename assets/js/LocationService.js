@@ -5,7 +5,7 @@ export async function GetCurrentLocation() {
         return new Promise(function(resolve, reject) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 resolve([position.coords.latitude, position.coords.longitude]);
-                setPosition(position);
+                // setPosition(position);
                 return position.coords;
             });
         });
