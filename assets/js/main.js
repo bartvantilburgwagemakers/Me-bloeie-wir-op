@@ -3,6 +3,7 @@ var TravelDistance = 0;
 var LastTravelDistance = 0;
 var LastLocation;
 var QuestionsDone = [];
+var Answer;
 
 function interval() {
   var div = document.getElementById("debug-Info");
@@ -57,23 +58,44 @@ function addDiv(innerHTML, element) {
   element.appendChild(newElement);
 }
 
-function Answer() {
-  var answerBtn = document.getElementById("answer");
-  if (answerBtn) {
-    var answerBtn = answerBtn.value;
-    console.log(answerBtn);
-    if ("{{page.answerBtn}}" === answerBtn) {
-      alert("goed zo");
-    } else {
-      alert(answerBtn + " is fout");
-    }
-  }
-}
-
 function NextQuestion(){
   console.log("NextQuestion");
+  var vraag = "dit is een vraag";
   var questionDiv = document.getElementById("question");
   questionDiv.style.visibility = "visible";
-  document.getElementById("questionTest").innerHTML="dit is een vraag";
+  document.getElementById("infoText").style.visibility = "hidden";
+  document.getElementById("questionTest").innerHTML= vraag;
+  Answer = "test";
 
 }
+
+function validateAnswer(){
+    // Get the input field
+    var input = document.getElementById("answer").value;
+    console.log("input "+input);
+    if(input){
+      if( Answer.toLowerCase() === input.toLowerCase()){
+        alert("goed gedaan");
+      }else{
+        alert("Helaas probeer het nog eens");
+      }
+
+    }
+}
+
+window.onload = function answerFunction() {
+  var btn = document.getElementById("answerBtn");
+  btn.onclick = validateAnswer;
+
+  var input = document.getElementById("answer");
+  // Execute a function when the user releases a key on the keyboard
+  input.addEventListener("keyup", function (event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      document.getElementById("answerBtn").click();
+    }
+  });
+};

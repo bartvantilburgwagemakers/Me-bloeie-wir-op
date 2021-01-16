@@ -26,6 +26,9 @@ Test vraag:
 
 <button id="answerBtn">Click me</button>
 
+
+<button id="answerBtn" onclick="changeFunc()">change function</button>
+
 [back](././)
 
 <script>
@@ -47,5 +50,12 @@ input.addEventListener("keyup", function(event) {
     document.getElementById("answerBtn").click();
   }
 });
+}
+
+function changeFunc() {
+  myfunction = function test(){
+    console.log("test vervangen functie");
+    alert("jeey");
+  }
 }
 </script>

@@ -6,7 +6,7 @@ description: Om de x aantal meter kunt u een nieuwe vraag krijgen.
 
 ## Vraag
 
-We zulle eerst even wat moet lopen
+<div id="infoText">We zulle eerst even wat moet lopen</div>
 
 <div id="question" style ="visibility: hidden;" >
     <p id=questionTest></p>
