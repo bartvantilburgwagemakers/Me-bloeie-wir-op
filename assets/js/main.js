@@ -4,6 +4,8 @@ var LastTravelDistance = 0;
 var LastLocation;
 var QuestionsDone = [];
 var Answer;
+var Questions;
+var QuestionIndex = 0;
 
 function interval() {
   var div = document.getElementById("debug-Info");
@@ -30,7 +32,7 @@ function interval() {
     var diff = TravelDistance - LastTravelDistance;
     console.log("diff in travalDist "+diff);
     if(diff>200){
-      NextQuestion();
+      NextQuestion(QuestionIndex);
       LastTravelDistance = TravelDistance;
     }
   }else if(LastTravelDistance == 0){
@@ -58,15 +60,20 @@ function addDiv(innerHTML, element) {
   element.appendChild(newElement);
 }
 
-function NextQuestion(){
-  console.log("NextQuestion");
+function NextQuestion(index){
+  console.log("NextQuestion with "+index);
+
+  var question = Questions[index];
   var vraag = "dit is een vraag";
   var questionDiv = document.getElementById("question");
   questionDiv.style.visibility = "visible";
   document.getElementById("infoText").style.visibility = "hidden";
-  document.getElementById("questionTest").innerHTML= vraag;
-  Answer = "test";
+  document.getElementById("questionTest").innerHTML= question.Vraag;
+  Answer = question.Antwoord;
 
+  if(question.media){
+    document.getElementById("media").innerHTML=question.media;
+  }
 }
 
 function validateAnswer(){
@@ -76,6 +83,11 @@ function validateAnswer(){
     if(input){
       if( Answer.toLowerCase() === input.toLowerCase()){
         alert("goed gedaan");
+        QuestionIndex++;
+        var questionDiv = document.getElementById("question");
+        questionDiv.style.visibility = "hidden";
+        document.getElementById("answer").value ="";
+
       }else{
         alert("Helaas probeer het nog eens");
       }
@@ -98,4 +110,6 @@ window.onload = function answerFunction() {
       document.getElementById("answerBtn").click();
     }
   });
+
+  Questions = GetQuestions();
 };
