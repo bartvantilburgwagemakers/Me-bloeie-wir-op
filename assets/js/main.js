@@ -71,8 +71,8 @@ function NextQuestion(index){
   document.getElementById("questionTest").innerHTML= question.Vraag;
   Answer = question.Antwoord;
 
-  if(question.media){
-    document.getElementById("media").innerHTML=question.media;
+  if(question.Media_uri){
+    document.getElementById("media").innerHTML="<img src=\""+question.Media_uri+"\" width=\"500px\" \\>";
   }
 }
 
