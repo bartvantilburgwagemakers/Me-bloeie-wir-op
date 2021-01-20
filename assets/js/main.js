@@ -74,6 +74,16 @@ function NextQuestion(index){
   if(question.Media_uri){
     document.getElementById("media").innerHTML="<img src=\""+question.Media_uri+"\" width=\"500px\" \\>";
   }
+
+  if(question.media_audio){
+    var mediaContext = "<audio controls> <source src=\""+question.media_audio+"\" type=\"audio/mpeg\"> Your browser does not support the audio element.</audio>";
+    document.getElementById("media").innerHTML= mediaContext;
+  }
+
+  if(question.media_video){
+    var mediaContext = "<video  controls> <source src=\""+question.media_video+"\" type=\"video/mp4\">Your browser does not support the video tag.</video>";
+    document.getElementById("media").innerHTML= mediaContext;
+  }
 }
 
 function validateAnswer(){

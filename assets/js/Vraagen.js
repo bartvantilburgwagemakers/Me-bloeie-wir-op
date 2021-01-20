@@ -17,6 +17,15 @@ export function GetQuestions() {
     questions.push(vraag7);
     var vraag8 = NewVraag("8", "kaart, ei, verdwijnen, wier, koffiedik, verschijnen", "wana 1976" , "lied + jaar");
     questions.push(vraag8);
+    
+    var vraag9 = NewVraag("9", "kaart, ei, verdwijnen, wier, koffiedik, verschijnen", "wana 1976" , "lied + jaar");
+    vraag9.media_audio = "../Assets/K3farao.mp3"
+    questions.push(vraag9);
+
+    var vraag10 = NewVraag("10", "kaart, ei, verdwijnen, wier, koffiedik, verschijnen", "wana 1976" , "lied + jaar");
+    vraag10.media_video = "../Assets/K3Dans.mp4"
+    questions.push(vraag10);
+
 
     return questions;
 }
