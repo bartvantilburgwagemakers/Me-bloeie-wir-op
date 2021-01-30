@@ -1,6 +1,6 @@
 var Coordinates = [];
 var TravelDistance = 0;
-var LastTravelDistance = 0;
+var LastTravelDistance = localStorage.getItem('LastTravelDistance');
 var LastLocation;
 var QuestionsDone = [];
 var Answer;
@@ -34,9 +34,8 @@ function interval() {
     if(diff>200){
       NextQuestion(QuestionIndex);
       LastTravelDistance = TravelDistance;
+      localStorage.setItem('LastTravelDistance', TravelDistance);
     }
-  }else if(LastTravelDistance == 0){
-    LastTravelDistance = TravelDistance;
   }
   }
 
@@ -51,7 +50,6 @@ function getDistance(firstCoordinate, lastCoordinate) {
 
   return s;
 }
-// window.setInterval(interval, 3000);
 window.setInterval(interval, 30000);
 
 function addDiv(innerHTML, element) {
@@ -64,7 +62,6 @@ function NextQuestion(index){
   console.log("NextQuestion with "+index);
 
   var question = Questions[index];
-  var vraag = "dit is een vraag";
   var questionDiv = document.getElementById("question");
   questionDiv.style.visibility = "visible";
   document.getElementById("infoText").style.visibility = "hidden";
